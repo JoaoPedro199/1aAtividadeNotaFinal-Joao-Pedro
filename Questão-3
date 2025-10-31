@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cor de fundo</title>
 
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .botao_estilo {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="botao_estilo" id="botao_cor">Mudar Cor</button>
+
+    <script>
+        const cores = [
+            '#e74c3c',
+            '#3498db',
+            '#2ecc71',
+            '#f1c40f',
+            '#9b59b6',
+            '#1abc9c',
+            '#e67e22'
+        ];
+
+        const botao = document.getElementById('botao_cor');
+
+        botao.addEventListener('click', function() {
+            const indiceAleatorio = Math.floor(Math.random() * cores.length);
+            const corAleatoria = cores[indiceAleatorio];
+            document.body.style.backgroundColor = corAleatoria;
+        });
+    </script>
+
+</body>
+</html>
