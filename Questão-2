@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma</title>
 
+    <style>
+
+        .calculadora {
+            text-align: center;
+            width: 300px;
+            margin: 40px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .numero_soma {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 8px;
+            box-sizing: border-box; 
+        }
+
+        .botao-soma {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 10px;
+            cursor: pointer;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+
+        .resultado_soma {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="calculadora">
+
+        <h2>Calculadora</h2>
+
+        <input type="number" id="numero_1" class="campo-input" placeholder="Digite o primeiro numero">
+        
+        <input type="number" id="numero_2" class="campo-input" placeholder="Digite o segundo numero">
+
+        <button id="Botao" class=".botao-soma">Soma</button>
+
+        <p id="resultado" class="texto-resultado">O resultado é...</p>
+    
+    </section>
+
+    <script>
+        document.getElementById("Botao").addEventListener("click" , function() {
+
+            let valor1 = document.getElementById("numero_1").value;
+            let valor2 = document.getElementById("numero_2").value;
+
+            let num1 = Float(valor1);
+            let num2 = Float(valor2); 
+
+            let resultado = document.getElementById("resultado");
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultado.textContent = "Por favor, digite números válidos.";
+            } else {
+                let soma = num1 + num2;
+                resultado.textContent = "O resultado é: " + soma;
+            }
+        }); 
+    </script>
+</body>
+</html>
