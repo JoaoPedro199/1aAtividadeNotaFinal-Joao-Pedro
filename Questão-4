@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMC</title>
 
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; 
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            color: #333333;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #28a745; /* Verde para o título */
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input {
+            width: calc(100% - 20px); 
+            padding: 10px;
+            border: 1px solid #cccccc; 
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #28a745; /* Verde principal */
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838; /* Verde mais escuro no hover */
+        }
+
+        #resultado {
+            font-size: 22px; 
+            margin-top: 30px;
+            font-weight: bold;
+            word-wrap: break-word;
+        }
+        
+        /* Classes para as cores do resultado */
+        .sucesso {
+            color: #28a745; /* Verde para sucesso (corrigido do azul) */
+        }
+
+        .erro {
+            color: #dc3545; /* Vermelho para erro */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CALCULADORA IMC</h1>
+        <label for="peso">PESO (kg):</label>
+        <input type="number" id="peso" placeholder="Ex: 70,5" required>
+        <label for="altura">ALTURA (m):</label>
+        <input type="number" id="altura" placeholder="Ex: 1,75" required>
+        <button id="calcular">CALCULAR</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const calcularButton = document.getElementById("calcular");
+            const pesoInput = document.getElementById("peso");
+            const alturaInput = document.getElementById("altura");
+            const resultadoDiv = document.getElementById("resultado");
+
+            calcularButton.addEventListener("click", function () {
+                // *** MELHORIA AQUI ***
+                // Pega os valores e substitui vírgula por ponto
+                const pesoStr = pesoInput.value.replace(',', '.');
+                const alturaStr = alturaInput.value.replace(',', '.');
+
+                // Converte para número
+                const peso = parseFloat(pesoStr);
+                const altura = parseFloat(alturaStr);
+
+                if (!isNaN(peso) && !isNaN(altura) && altura > 0) {
+                    const imc = calcularIMC(peso, altura);
+                    const situacao = avaliarSituacao(imc);
+                    resultadoDiv.textContent = `Seu IMC é ${imc.toFixed(2)}. ${situacao}`;
+                    resultadoDiv.className = 'sucesso'; // Adiciona classe verde
+                } else {
+                    resultadoDiv.textContent = "Por favor, digite valores válidos.";
+                    resultadoDiv.className = 'erro'; // Adiciona classe vermelha
+                }
+            });
+
+            function calcularIMC(peso, altura) {
+                return peso / (altura * altura);
+            }
+
+            function avaliarSituacao(imc) {
+                if (imc < 18.5) {
+                    return "Você está abaixo do peso.";
+                } else if (imc < 24.9) {
+                    return "Seu peso está dentro da faixa normal.";
+                } else if (imc < 29.9) {
+                    return "Você está com sobrepeso.";
+                } else if (imc < 34.9) {
+                    return "Você tem obesidade grau I.";
+                } else if (imc < 39.9) {
+                    return "Você tem obesidade grau II.";
+                } else {
+                    return "Você tem obesidade grau III.";
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
